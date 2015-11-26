@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/global/main.xhtml">
+	<ui:define name="page-subtitle">
+		New Dish
+	</ui:define>
+	<ui:define name="page-content">
+
+		<h:form autocomplete="off" id="NewDishForm">
+			<h2>Add new dish to the menu</h2>
+			<p:messages styleClass="errorMessage" autoUpdate="true" />
+
+			<p:panelGrid columns="2" styleClass="columns, noBorders">
+
+				<h:outputText value="Name: " />
+				<p:inputText id="cName" value="#{administratorBean.newDish.name}"
+					required="true" requiredMessage="Dish name is required." />
+
+				<h:outputText value="Price: " />
+				<p:inputText id="cLogin" value="#{administratorBean.newDish.price}"
+					required="true" requiredMessage="Price is required." />
+
+				<h:outputText value="If active:" />
+				<h:selectOneMenu value="#{administratorBean.newDish.active}">
+					<f:selectItem itemValue="1" itemLabel="Active" />
+					<f:selectItem itemValue="0" itemLabel="Inactive" />
+				</h:selectOneMenu>
+
+				<h:outputText value="If kitchen made:" />
+				<h:selectOneMenu value="#{administratorBean.newDish.kitchenMade}">
+					<f:selectItem itemValue="1" itemLabel="Yes" />
+					<f:selectItem itemValue="0" itemLabel="No" />
+				</h:selectOneMenu>
+
+				<h:outputText value="Dish category:" />
+				<h:selectOneMenu value="#{administratorBean.newDish.categoryId}">
+					<f:selectItem itemValue="2" itemLabel="Appetizer" />
+					<f:selectItem itemValue="1" itemLabel="index course" />
+					<f:selectItem itemValue="3" itemLabel="Dessert" />
+					<f:selectItem itemValue="4" itemLabel="Soft drinks" />
+					<f:selectItem itemValue="5" itemLabel="Alcohol" />
+				</h:selectOneMenu>
+
+			</p:panelGrid>
+			<br />
+			<p:commandButton value="Add dish"
+				action="#{administratorBean.registerDish()}" update="NewDishForm" />
+			<p:commandButton value="Back"
+				action="administratorBean.xhtml?faces-redirect=true" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

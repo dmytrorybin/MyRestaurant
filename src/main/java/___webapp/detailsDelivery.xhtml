@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/global/main.xhtml">
+	<ui:define name="page-subtitle">
+		Order details
+	</ui:define>
+	<ui:define name="page-content">
+	<h:form>  
+    <p:growl id="messages"/>
+    	<h2>Order Details</h2>
+		<h:panelGrid columns="2">
+			<h:dataTable value="#{deliveryBean.currentOrder.customerOItems}" var="item"
+				styleClass="deliveryBeanTable" headerClass="deliveryBeanTableHeader"
+				rowClasses="deliveryBeanTableOddRow, deliveryBeanTableEvenRow">
+
+				<!--  rendered="#{sessionBean.loggedInStaff.position == 1}" -->
+
+
+				
+			</h:dataTable> 
+	
+		</h:panelGrid>
+					<h:commandButton value="Set 'delivering'" action="#{deliveryBean.setStatusDelivering()}"/> 
+					<h:commandButton value="Set 'delivered'" action="#{deliveryBean.setStatusDelivered()}" 
+							rendered="#{deliveryBean.isVisible() == true}" />
+				<br></br><br></br><br></br>
+					<h:commandButton value="Back" action="delivery.xhtml?faces-redirect=true"/> 	
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

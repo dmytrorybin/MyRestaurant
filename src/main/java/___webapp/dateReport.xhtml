@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/global/main.xhtml">
+	<ui:define name="page-subtitle">
+		Date report
+	</ui:define>
+	<ui:define name="page-content">
+
+	<h:form autocomplete="off" id="DReportForm"> 
+    <p:growl id="messages"/>
+    	<h1>Date Report</h1>
+		<p:messages styleClass="errorMessage" autoUpdate="true" />
+
+		<p:panelGrid columns="2" styleClass="columns, noBorders">
+		
+		<p:dataTable id="cat" var="item" value="#{analiticBean.reportList}" editable="false" editMode="cell" widgetVar="cellMenu" style="width: 50%">
+        <p:column headerText="Date">
+              <p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{item.getKey()}" /></f:facet>
+                  <f:facet name="input"><p:inputText id="categoryInput" value="#{item.getKey()}" style="width:96%"/></f:facet>
+              </p:cellEditor>
+          </p:column>
+        <p:column headerText="Income">
+              <p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{item.getIncome()} $" /></f:facet>
+                  <f:facet name="input"><p:inputText id="incomeInput" value="#{item.getIncome()}" style="width:96%"/></f:facet>
+              </p:cellEditor>
+          </p:column>
+          </p:dataTable>
+		
+		</p:panelGrid>
+		<br />
+			<p:commandButton value="Back" action="report.xhtml?faces-redirect=true" />
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+
+

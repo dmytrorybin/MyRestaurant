@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/global/main.xhtml">
+	<ui:define name="page-subtitle">
+		"Italia" Restaurant
+	</ui:define>
+	<ui:define name="page-content">
+		<h:form>
+			<p:growl id="messages" />
+			
+			 <h1>Welcome to our Restaurant!</h1>
+
+			<h:panelGroup>
+				<h:commandButton value="Orders for cooking"
+					action="chef.xhtml?faces-redirect=true"
+					rendered="#{mySessionBean.loggedInStaff.position.equals('kitchen staff member')}" />
+				<h:commandButton value="Orders ready for delivery"
+					action="delivery.xhtml?faces-redirect=true"
+					rendered="#{mySessionBean.loggedInStaff.position.equals('delivery guy')}" />
+				<h:commandButton value="Administer menu"
+					action="administrator.xhtml?faces-redirect=true"
+					rendered="#{mySessionBean.loggedInStaff.position.equals('restaurant administrator')}" />
+				<h:commandButton value="Generate reports"
+					action="report.xhtml?faces-redirect=true"
+					rendered="#{mySessionBean.loggedInStaff.position.equals('business analitic')}" />
+				<h:commandButton value="Administer staff accounts"
+					action="security.xhtml?faces-redirect=true"
+					rendered="#{mySessionBean.loggedInStaff.position.equals('security officer')}" />
+				
+				<h:commandButton value="Logout"
+					action="#{loginBean.logout()}"
+					rendered="#{mySessionBean.loggedInCustomer != null || mySessionBean.loggedInStaff != null}" />
+			</h:panelGroup>
+
+
+			<!--  	<div style="text-align: center">
+					<h:graphicImage value="resources/logo_small.jpg"
+						style="margin: 50px; width: 50%; height: 50%"/>
+				</div> -->
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

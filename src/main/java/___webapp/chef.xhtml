@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/global/main.xhtml">
+	<ui:define name="page-subtitle">
+		Chef page
+	</ui:define>
+	<ui:define name="page-content">
+
+	
+	<h:form id="mainForm"> 
+    <p:growl id="messages"/>
+    	<h2>Orders for cooking</h2>
+     <h:commandButton value="Refresh" action="#{chefBean.chefTable()}" />
+	
+				<h:panelGrid columns="2">
+				<p:dataTable id="menu" var="item"
+					value="#{chefBean.customerOrders}" editable="false"
+					editMode="cell" widgetVar="cellMenu">
+
+					<p:column headerText="ID" sortBy="#{item.id}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{item.id}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="idInput" value="#{item.id}"
+									style="width:96%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column headerText="Order Date" sortBy="#{item.orderDate}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{item.orderDate}">
+								<f:convertDateTime pattern="dd.MM.yyyy" />
+								</h:outputText>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="dateInput" value="#{item.orderDate}"
+									style="width:96%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+				<p:column>
+					<h:commandButton value="Take order"	action="#{chefBean.takeOrder(item)}" />
+					
+				</p:column>
+				</p:dataTable>
+
+		</h:panelGrid>
+	
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

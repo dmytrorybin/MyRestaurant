@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/global/main.xhtml">
+	<ui:define name="page-subtitle">
+		My order list
+	</ui:define>
+	<ui:define name="page-content">
+
+<h:form>  
+    <p:growl id="messages"/>
+    	<h2> Your order items</h2> 
+    <h:panelGrid columns="2" >
+    	<h:outputText value="Your cart is empty." rendered="#{cartBean.itemsList.size() == 0}" />
+		<h:dataTable  value="#{cartBean.itemsList}" var="item" rendered="#{cartBean.itemsList.size() != 0}"
+			styleClass="MenuTable" headerClass="MenuTableHeader"
+			rowClasses="MenuTableOddRow, MenuTableEvenRow">		
+			<h:column>
+				<f:facet name="header">Name</f:facet> 
+				<h:outputText value="#{item.dish.name}" /> 
+			</h:column>
+			<h:column>
+			<f:facet name="header">Quantity</f:facet> 
+				<p:spinner id="basic" value="#{item.quantity}" min="1" max="99" placeholder="1"/>
+			</h:column>
+	  		<h:column>
+				<f:facet name="header">Price</f:facet> 
+				<h:outputText value="#{item.dish.price} $" /> 
+			</h:column>											
+			
+			<h:column>
+ 				<h:commandButton value="Remove" actionListener="#{cartBean.removeFromCart(item)}" />		
+			</h:column>  
+			
+		</h:dataTable>
+		</h:panelGrid>	
+			<h:commandButton value="Submit" action="#{cartBean.submit()}" rendered="#{cartBean.itemsList.size() != 0}"/> 	
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

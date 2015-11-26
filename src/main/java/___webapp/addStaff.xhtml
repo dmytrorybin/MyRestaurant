@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/global/main.xhtml">
+	<ui:define name="page-subtitle">
+		Add staff
+	</ui:define>
+	<ui:define name="page-content">
+		<h:form autocomplete="off" id="NewStaffForm">
+			<p:growl id="messages" />
+			<h2>Add new staff member</h2>
+			<p:messages styleClass="errorMessage" autoUpdate="true" />
+
+			<p:panelGrid columns="2" styleClass="columns, noBorders">
+
+				<h:outputText value="Name: " />
+				<p:inputText id="cName" value="#{securityBean.newStaff.name}"
+					required="true" requiredMessage="Name is required." />
+
+
+				<h:outputText value="Login: " />
+				<p:inputText id="cLogin" value="#{securityBean.newStaff.login}"
+					required="true" requiredMessage="Login is required." />
+
+				<h:outputText value="Password: " />
+				<p:inputText id="cPassword"
+					value="#{securityBean.newStaff.password}" required="true"
+					requiredMessage="Password is required." />
+
+				<h:outputText value="E-mail: " />
+				<p:inputText id="cEmail" value="#{securityBean.newStaff.email}"
+					required="true" requiredMessage="E-mail is required." />
+
+				<h:outputText value="Position:" />
+				<h:selectOneMenu value="#{securityBean.newStaff.position}">
+					<f:selectItem itemValue="kitchen staff member"
+						itemLabel="Kitchen staff member" />
+					<f:selectItem itemValue="delivery guy" itemLabel="delivery guy" />
+					<f:selectItem itemValue="restaurant administrator"
+						itemLabel="Restaurant administrator" />
+					<f:selectItem itemValue="business analitic"
+						itemLabel="Business analitic" />
+				</h:selectOneMenu>
+			</p:panelGrid>
+			<br />
+			<p:commandButton value="Register new member"
+				action="#securityBean.register()}" update="NewStaffForm" />
+			<p:commandButton value="Back"
+				action="security.xhtml?faces-redirect=true" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

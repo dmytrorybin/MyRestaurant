@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/global/main.xhtml">
+	<ui:define name="page-subtitle">
+		Regiatrstion
+	</ui:define>
+	<ui:define name="page-content">
+
+	<h:form autocomplete="off" id="loginForm"> 
+    <p:growl id="messages"/>
+    	<h2>Registering new customer</h2>
+		<p:messages styleClass="errorMessage" autoUpdate="true" />
+
+		<p:panelGrid columns="2" styleClass="columns, noBorders">
+			<h:outputText value="Name: " />
+			<p:inputText id="cName" value="#{newCustomerBean.newCustomer.name}"
+				required="true" requiredMessage="Name is required." />
+
+			<h:outputText value="Login: " />
+			<p:inputText id="cLogin" value="#{newCustomerBean.newCustomer.login}"
+				required="true" autocomplete="off"
+				requiredMessage="Login is required." />
+
+			<h:outputText value="Password: " autocomplete="off" />
+			<p:password id="pass" value="#{newCustomerBean.newCustomer.password}"
+				required="true" autocomplete="off"
+				requiredMessage="Password is required." />
+
+			<h:outputText value="E-mail: " />
+			<p:inputText id="cEmail" value="#{newCustomerBean.newCustomer.email}"
+				required="true" requiredMessage="E-mail is required." />
+
+			<h:outputText value="Address: " />
+			<p:inputText id="cAddress"
+				value="#{newCustomerBean.newCustomer.address}" required="true"
+				requiredMessage="Address is required." />
+
+
+		</p:panelGrid>
+		<br />
+		<p:commandButton value="Register"
+			action="#{newCustomerBean.register()}" update="loginForm" />
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+

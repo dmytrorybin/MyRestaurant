@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/global/main.xhtml">
+	<ui:define name="page-subtitle">
+		Order details
+	</ui:define>
+	<ui:define name="page-content">
+
+	<h:form>  
+    <p:growl id="messages"/>
+    	<h2>Order Details</h2>
+		<h:panelGrid columns="2">
+		
+		<p:dataTable id="menu" var="item"
+					value="#{chefBean.currentOrder.customerOItems}" editable="false"
+					editMode="cell" widgetVar="cellMenu">
+
+					<p:column headerText="Dish name">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{item.dish.name}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="idInput" value="#{item.dish.name}"
+									style="width:96%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					</p:dataTable>
+		
+		
+			<!--  <h:dataTable value="#{chefBean.currentOrder.customerOItems}" var="item"
+				styleClass="ChefTable" headerClass="ChefTableHeader"
+				rowClasses="ChefTableOddRow, ChefTableEvenRow">
+
+
+				<h:column>
+					<f:facet name="header">name</f:facet>
+					<h:outputText value="#{item.dish.name}" />
+				</h:column> 
+				
+			</h:dataTable> -->
+
+			<h:commandButton value="Complete order" action="#{chefBean.setStatusCooked()}"/> 
+
+		</h:panelGrid>
+						
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

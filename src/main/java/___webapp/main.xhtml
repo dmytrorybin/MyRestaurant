@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>"Italia" Restaurant</title>
+	<!--  <h:outputStylesheet library="css" name="style.css" target="head" /> -->
+	
+	<f:facet name="first">
+			<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+			<base href="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/" />
+			<script type="text/javascript" src="resources/jquery-2.1.4.min.js"></script>
+			<script type="text/javascript"
+				src="resources/bootstrap/js/bootstrap.min.js"></script>
+			<!--<script type="text/javascript" src="http://malsup.github.com/jquery.form.js"></script>-->
+			<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+			<h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+			<h:outputStylesheet library="bootstrap/css"
+				name="bootstrap-theme.css" />
+			<title><ui:insert name="title">"Italia" Restaurant</ui:insert></title>
+		</f:facet>
+</h:head>
+<h:body>
+	<!--  	<h2>"Italia" Restaurant</h2>-->
+	<h:form>  
+    <p:growl id="messages"/>
+    <p:menubar>
+        <p:menuitem value="Home" url="index.xhtml" icon="ui-icon-star"/>
+        <p:menuitem value="Menu" url="menu.xhtml" icon="ui-icon-star" />
+    
+        <p:menuitem value="About" url="about.xhtml" icon="ui-icon-star" />
+        <p:menuitem value="Shopping Cart" url="cart.xhtml" icon="ui-icon-star" style="align: right"/>
+            <f:facet name="options">
+            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" action="#{loginBean.logout()}"	rendered="#{mySessionBean.loggedInCustomer != null || mySessionBean.loggedInStaff != null}"/>
+            <p:commandButton type="button" value="Login/Registration" icon="ui-icon-extlink" action="#{loginBean.login()}" rendered="#{mySessionBean.loggedInCustomer == null}"/>
+            
+            </f:facet>
+    </p:menubar>
+    
+        
+		<!--  <a href="main.xhtml?faces-redirect=true">Home_</a>
+		<a href="menu.xhtml?faces-redirect=true">Menu_</a>
+		<a href="about.xhtml?faces-redirect=true">About_</a>
+		<a href="login.xhtml?faces-redirect=true">Login/Registration_</a>
+		<a href="cart.xhtml?faces-redirect=true">Shopping Cart</a>
+		<h:commandButton value="Logout" action="#{loginBean.logout()}"
+			rendered="#{mySessionBean.loggedInCustomer != null}" />
+		<h:commandButton value="Stuff logout"
+			action="#{loginBean.logout()}"
+			rendered="#{mySessionBean.loggedInStaff != null}" /> -->
+			
+			<br/><br/><br/>
+			
+			<h:panelGroup> 
+			<h:commandButton value="Orders for cooking" action="chef.xhtml?faces-redirect=true" rendered="#{mySessionBean.loggedInStaff.position.equals('kitchen staff member')}"/>
+			<h:commandButton value="Orders ready for delivery" action="delivery.xhtml?faces-redirect=true" rendered="#{mySessionBean.loggedInStaff.position.equals('delivery guy')}"/>
+			<h:commandButton value="Administer menu" action="administrator.xhtml?faces-redirect=true" rendered="#{mySessionBean.loggedInStaff.position.equals('restaurant administrator')}"/>
+			<h:commandButton value="Generate reports" action="report.xhtml?faces-redirect=true" rendered="#{mySessionBean.loggedInStaff.position.equals('business analitic')}"/>
+			<h:commandButton value="Administer staff accounts" action="security.xhtml?faces-redirect=true" rendered="#{mySessionBean.loggedInStaff.position.equals('security officer')}"/>		
+			</h:panelGroup>
+
+
+		<h:panelGrid columns="2">
+
+
+			<div style="text-align: center">
+				<h:graphicImage value="resources/logo_small.jpg"   style="margin: 50px; width: 50%; height: 50%; text-align: center" />
+			</div>
+			<h:panelGroup>
+
+			<!-- 	<ui:fragment rendered="#{mySessionBean.loggedInCustomer == null}">
+					 		<h:outputText value="Welcome, Guest!" />
+				<a href="login.xhtml?faces-redirect=true">Log in</a>  
+
+				</ui:fragment>-->
+
+			</h:panelGroup>
+
+			<!--  	<h:commandButton value="Orders for cooking" action="chef.xhtml" rendered="#{mySessionBean.loggedInStaff.position.equals("kitchen staff member")}"/>  	-->
+		</h:panelGrid>
+	</h:form>
+	<div id="page-content">
+			<ui:insert name="page-content" />
+			<p:ajaxStatus onstart="PF('statusDialog').show()"
+				onsuccess="PF('statusDialog').hide()" />
+
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage value="resources/ajax-loader.gif" />
+			</p:dialog>
+		</div>
+
+		<div id="footer">"Italia" Restaurant. :: All rights reserved :: (c) 2015</div>
+</h:body>
+</html>

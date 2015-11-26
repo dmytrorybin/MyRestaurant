@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/global/main.xhtml">
+	<ui:define name="page-subtitle">
+		Delivery
+	</ui:define>
+	<ui:define name="page-content">
+
+
+		<h:form id="mainForm">
+			<p:growl id="messages" />
+			<h2>Orders for delivery</h2>
+			<p:messages styleClass="errorMessage" autoUpdate="true" />
+			<h:commandButton value="Refresh"
+				action="#{deliveryBean.deliveryTable()}" />
+
+			<h:panelGrid columns="2">
+				<p:dataTable id="menu" var="item"
+					value="#{deliveryBean.customerOrders}" editable="false"
+					editMode="cell" widgetVar="cellMenu">
+
+					<p:column headerText="ID" sortBy="#{item.id}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{item.id}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="idInput" value="#{item.id}" style="width:96%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Order Date" sortBy="#{item.orderDate}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{item.orderDate}" >
+								<f:convertDateTime pattern="dd.MM.yyyy" />
+								</h:outputText>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="dateInput" value="#{item.orderDate}"
+									style="width:96%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column>
+						<p:commandButton value="Take order"
+							action="#{deliveryBean.takeOrder(item)}" />
+					</p:column>
+
+				<!-- <p:column>
+					<p:outputLabel for="console" value="Basic:"	 />
+					<h:selectOneMenu id="console"
+						value="#{deliveryBean.currentOrder.statusId}" style="width:125px">
+						<f:selectItem itemLabel="delivering" itemValue="3" />
+						<f:selectItem itemLabel="delivered" itemValue="4" />
+					</h:selectOneMenu>
+					<p:commandButton value="Set changes"
+							action="#{deliveryBean.setChanges()}" />
+					</p:column>  -->	
+				</p:dataTable>
+
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,36 @@
+--CREATE TABLE customerOrderItem
+--(
+--   id INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+--   menuDish INT CONSTRAINT mDish_fk references menu,
+--   orderId INT CONSTRAINT order_fk references customerOrder,
+--   PRIMARY KEY (id)
+--);
+
+
+--CREATE TABLE customerOrder
+--(
+--   id INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+--   totalPrice DECIMAL(10, 2) NOT NULL,
+--   status VARCHAR(60) NOT NULL,
+--   orderDate TIMESTAMP,
+--   customerId INT CONSTRAINT cust_fk references customer,
+--   PRIMARY KEY (id)
+--);
+
+--ALTER TABLE menu DROP COLUMN active
+ALTER TABLE menu ADD active BOOLEAN NOT NULL DEFAULT false
+ALTER TABLE menu DROP COLUMN kitchenMade
+ALTER TABLE menu ADD active DECIMAL(10,2) NOT NULL DEFAULT 1
+
+--
+--INSERT INTO customer
+--(name, email, login, password, address, regDate)
+--    values('Eddie', 'dsfdsf@b.com', 'user3', '111', 'Lviv', '2013-07-13 12:20:14.0');
+
+--INSERT INTO menu
+--(name, price, category, kitchenMade, active)
+--    values('Tiramisu', 10, 'dessert',1, 1);
+
+INSERT INTO stuff
+(name, email, login, password, position)
+    values('Admin', 'f@b.com', 'admin', '111', 'Security officer');

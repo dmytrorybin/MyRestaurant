@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/global/main.xhtml">
+	<ui:define name="page-subtitle">
+		"Italia" Restaurant
+	</ui:define>
+	<ui:define name="page-content">
+
+		<h:form id="mainForm">
+			<h2>Menu items</h2>
+
+			<p:commandButton value="Appetizers"
+				action="#{menuBean.showMenuCategory(2)}" update="mainForm" />
+			<p:commandButton value="Main Courses"
+				action="#{menuBean.showMenuCategory(1)}" update="mainForm" />
+			<p:commandButton value="Desserts"
+				action="#{menuBean.showMenuCategory(3)}" update="mainForm" />
+			<p:commandButton value="Soft Drinks"
+				action="#{menuBean.showMenuCategory(4)}" update="mainForm" />
+			<p:commandButton value="Alcohol"
+				action="#{menuBean.showMenuCategory(5)}" update="mainForm" />
+			<h:panelGrid columns="2">
+
+				<p:dataTable value="#{menuBean.menuItems}" var="menu">
+					<p:column headerText="Name">
+						<h:outputText value="#{menu.name}" />
+					</p:column>
+					<p:column headerText="Price">
+						<h:outputText value="#{menu.price} $" />
+					</p:column>
+					<p:column>
+						<h:commandButton value="Add to Cart"
+							actionListener="#{cartBean.addToCart(menu)}" />
+					</p:column>
+				</p:dataTable>
+
+			</h:panelGrid>
+			<h:commandButton value="Shopping Cart"
+				action="cart.xhtml?faces-redirect=true" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
